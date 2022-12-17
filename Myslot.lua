@@ -13,6 +13,7 @@ local MYSLOT_AUTHOR = "Boshi Lian <farmer1992@gmail.com>"
 
 
 local MYSLOT_VER = 30
+local DEWATER_VER = 1 
 local MYSLOT_ALLOW_VER = {MYSLOT_VER}
 
 -- local MYSLOT_IS_DEBUG = true
@@ -220,6 +221,61 @@ function MySlot:Export(opt)
 
     msg.ver = MYSLOT_VER
     msg.name = UnitName("player")
+    msg.realm = GetRealmName()
+    _, _, raceID = UnitRace('player')
+    msg.race = raceID
+    _, _, classID = UnitClass('player')
+    msg.class = classID
+    msg.sex = UnitSex("player")
+    msg.level = UnitLevel("player")
+
+    msg.inventory = {}
+    invtable = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19}
+    for v, i in pairs(invtable) do
+        itemLink = GetInventoryItemLink("player", v)
+        if itemLink then
+            local inv = _MySlot.Inventory()
+            inv.id = i 
+            inv.itemLink = itemLink
+            msg.inventory[#msg.inventory + 1] = inv
+        end 
+    end
+
+    msg.bag = {}
+    for i = 1, NUM_BAG_SLOTS + NUM_BANKBAGSLOTS do
+        local invID = ContainerIDToInventoryID(i)
+        baglink = GetInventoryItemLink("player", invID)
+        if baglink then
+            local b = _MySlot.Bag()
+            b.id = i 
+            b.baglink = baglink
+            b.item = {}
+            for j = 1,GetContainerNumSlots(i) do
+                itemlink = GetContainerItemLink(i, j)
+                if itemlink then
+                    b.item[j] = itemlink
+                else
+                    b.item[j] = "empty"
+                end
+            end
+            msg.bag[#msg.bag + 1] = b
+        end
+     end
+    bagindex = {-2,-1,0}
+    for v, i in pairs(bagindex) do 
+        local b = _MySlot.Bag()
+        b.id = i 
+        b.item = {}
+        for j = 1,GetContainerNumSlots(i) do
+            itemlink = GetContainerItemLink(i, j)
+            if itemlink then
+                b.item[j] = itemlink
+            else
+                b.item[j] = "empty"
+            end
+        end
+        msg.bag[#msg.bag + 1] = b
+    end
 
     msg.macro = {}
 
@@ -277,16 +333,18 @@ function MySlot:Export(opt)
     -- {{{ OUTPUT
     local s = ""
     s = "@ --------------------" .. MYSLOT_LINE_SEP .. s
-    s = "@ " .. L["Feedback"] .. "  farmer1992@gmail.com" .. MYSLOT_LINE_SEP .. s
+    s = "@ " .. L["Feedback"] .. "xjq314@gmail.com" .. MYSLOT_LINE_SEP .. s
     s = "@ " .. MYSLOT_LINE_SEP .. s
     s = "@ " .. LEVEL .. ":" ..UnitLevel("player") .. MYSLOT_LINE_SEP .. s
     -- s = "@ " .. SPECIALIZATION ..":" .. ( GetSpecialization() and select(2, GetSpecializationInfo(GetSpecialization())) or NONE_CAPS ) .. MYSLOT_LINE_SEP .. s
-    s = "@ " .. TALENT .. ":" .. select(3,GetTalentTabInfo(1)) .. "/" .. select(3,GetTalentTabInfo(2)) .. "/" .. select(3,GetTalentTabInfo(3)) .. MYSLOT_LINE_SEP .. s
+    -- s = "@ " .. TALENT .. ":" .. select(3,GetTalentTabInfo(1)) .. "/" .. select(3,GetTalentTabInfo(2)) .. "/" .. select(3,GetTalentTabInfo(3)) .. MYSLOT_LINE_SEP .. s
     s = "@ " .. CLASS .. ":" ..UnitClass("player") .. MYSLOT_LINE_SEP .. s
+    s = "@ " .. RACE .. ":" ..UnitRace("player") .. MYSLOT_LINE_SEP .. s
     s = "@ " .. PLAYER ..":" ..UnitName("player") .. MYSLOT_LINE_SEP .. s
+    s = "@ " .. "REALM" ..":" ..GetRealmName() .. MYSLOT_LINE_SEP .. s 
     s = "@ " .. L["Time"] .. ":" .. date() .. MYSLOT_LINE_SEP .. s
     s = "@ Wow (V" .. GetBuildInfo() .. ")" .. MYSLOT_LINE_SEP .. s
-    s = "@ Myslot (V" .. MYSLOT_VER .. ")" .. MYSLOT_LINE_SEP .. s
+    s = "@ Dewater (V" .. DEWATER_VER .. ")" .. MYSLOT_LINE_SEP .. s
 
     local d = base64.enc(t)
     local LINE_LEN = 60
@@ -295,7 +353,7 @@ function MySlot:Export(opt)
     end
     s = strtrim(s)
     s = s .. MYSLOT_LINE_SEP .. "@ --------------------"
-    s = s .. MYSLOT_LINE_SEP .. "@ END OF MYSLOT"
+    s = s .. MYSLOT_LINE_SEP .. "@ END OF DEWATER"
 
     return s
     -- }}}
