@@ -1,0 +1,28 @@
+## Interface: 30400
+## Title: Dewater
+## Notes: Dewater is for saving your character after CWOW is shutdown
+## Notes-zhCN: Dewater(脱水）可以在关服前帮助你保存角色信息。
+## Author: xjq314(xjq314@gmail.com)
+## Version: v0.0.1
+## SavedVariables: MyslotExports
+## SavedVariablesPerCharacter: MyslotSettings
+
+
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+
+libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
+
+libs\base64.lua
+libs\crc32.lua
+libs\lua-pb\lua-pb.xml
+
+protobuf\Myslot.lua
+
+event.lua
+locales.lua
+keys.lua
+Myslot.lua
+gui.lua
+options.lua
