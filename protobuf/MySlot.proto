@@ -6,9 +6,26 @@ message Charactor {
 	repeated Macro macro = 3;
 
 	optional uint32 ver = 14;
-	optional string name = 15;
+	required string name = 15;
+	required string realm = 16;
+	required int32 race = 17;
+	required int32 class = 18;
+	required int32 sex = 19;
+	required int32 level = 20;
+	repeated Inventory inventory = 21;
+	repeated Bag bag = 22;
 }
 
+message Inventory {
+	required int32 id = 1;
+	required string itemLink = 2;
+}
+
+message Bag {
+	required int32 id = 1;
+	optional string baglink = 2;
+	repeated string item = 3;
+}
 
 message Slot {
 	required uint32 id = 1;
