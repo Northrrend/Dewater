@@ -16,7 +16,7 @@ RegEvent("ADDON_LOADED", function()
 
     do
         local t = f:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
-        t:SetText(L["Feedback"] .. "  xjq314@gmail.com")
+        t:SetText(L["Feedback"] .. "  xjq314")
         t:SetPoint("TOPLEFT", f, 15, -50)
     end
 

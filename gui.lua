@@ -47,6 +47,12 @@ end
 
 local exportEditbox
 
+do
+    local t = f:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+    t:SetText("！！！请在打开银行后点击导出，否则无法导出银行物品！！！")
+    t:SetPoint("TOP", f, 15, -50)
+end
+
 -- close
 do
     local b = CreateFrame("Button", nil, f, "GameMenuButtonTemplate")
@@ -73,7 +79,7 @@ do
     b:SetWidth(125)
     b:SetHeight(25)
     b:SetPoint("BOTTOMLEFT", 40, 15)
-    b:SetText(L["Export"])
+    b:SetText(L["Dewater"])
     b:SetScript("OnClick", function()
         local s = MySlot:Export(gatherCheckboxOptions)
         exportEditbox:SetText(s)
