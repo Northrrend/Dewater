@@ -41,9 +41,7 @@ Under developing：
 
 ## Get Myslot
 
- * Curse (Lastest stable) http://www.curse.com/addons/wow/myslot
- * Wowace (stable and test) http://www.wowace.com/addons/myslot/
-
+ * Curse (Lastest stable) https://www.curseforge.com/wow/addons/dewater
 
 ## Contrubuting
 
