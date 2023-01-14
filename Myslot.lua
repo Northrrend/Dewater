@@ -9,7 +9,7 @@ local pblua = MySlot.luapb
 local _MySlot = pblua.load_proto_ast(MySlot.ast)
 
 
-local MYSLOT_AUTHOR = "Boshi Lian <farmer1992@gmail.com>"
+local MYSLOT_AUTHOR = "xjq314"
 
 
 local MYSLOT_VER = 30
@@ -89,7 +89,7 @@ local function TableToString(s)
 end
 
 function MySlot:Print(msg)
-    DEFAULT_CHAT_FRAME:AddMessage("|CFFFF0000<|r|CFFFFD100Myslot|r|CFFFF0000>|r"..(msg or "nil"))
+    DEFAULT_CHAT_FRAME:AddMessage("|CFFFF0000<|r|CFFFFD100Dewater|r|CFFFF0000>|r"..(msg or "nil"))
 end
 
 -- {{{ GetMacroInfo
@@ -701,26 +701,3 @@ function MySlot:RecoverData(msg, opt)
     MySlot:Print(L["All slots were restored"])
 end
 
-function MySlot:Clear(what)
-    if what == "ACTION" then
-        for i = 1, MYSLOT_MAX_ACTIONBAR do
-            PickupAction(i)
-            ClearCursor()
-        end
-    elseif what == "MACRO" then
-        for i = MAX_ACCOUNT_MACROS + MAX_CHARACTER_MACROS, 1, -1 do
-            DeleteMacro(i)
-        end
-    elseif what == "BINDING" then
-        for i = 1, GetNumBindings() do
-            local _, _, key1, key2 = GetBinding(i)
-            
-            for _, key in pairs({key1, key2}) do
-                if key then
-                    SetBinding(key, nil, 1)
-                end
-            end
-        end
-        SaveBindings(GetCurrentBindingSet())
-    end
-end

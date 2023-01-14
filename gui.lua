@@ -145,13 +145,13 @@ RegEvent("ADDON_LOADED", function()
     MyslotSettings.minimap = MyslotSettings.minimap or { hide = false }
     local config = MyslotSettings.minimap
 
-    icon:Register("Myslot", ldb:NewDataObject("Myslot", {
-            icon = "Interface\\MacroFrame\\MacroFrame-Icon",
+    icon:Register("Dewater", ldb:NewDataObject("Dewater", {
+            icon = "Interface\\Buttons\\UI-MicroButton-MainMenu-Up",
             OnClick = function()
                 f:SetShown(not f:IsShown())
             end,
             OnTooltipShow = function(tooltip)
-                tooltip:AddLine(L["Myslot"])
+                tooltip:AddLine(L["Dewater"])
             end,
         }), config)
     
@@ -164,64 +164,15 @@ RegEvent("ADDON_LOADED", function()
 
 end)
 
-SlashCmdList["MYSLOT"] = function(msg, editbox)
+SlashCmdList["DEWATER"] = function(msg, editbox)
     local cmd, what = msg:match("^(%S*)%s*(%S*)%s*$")
 
     if cmd == "clear" then
         -- MySlot:Clear(what)
         InterfaceOptionsFrame_OpenToCategory(L["Myslot"])
         InterfaceOptionsFrame_OpenToCategory(L["Myslot"])
-    elseif cmd == "trim" then
-        if not MyslotExports then
-            MyslotExports = {}
-        end
-        if not MyslotExports["exports"] then
-            MyslotExports["exports"] = {}
-        end
-        local exports = MyslotExports["exports"]
-        local n = tonumber(what) or MAX_PROFILES_COUNT
-        n = math.max(n, 0)
-        while #exports > n do
-            table.remove(exports, 1)
-        end
-        C_UI.Reload()
     else
         f:Show()
     end
 end
-SLASH_MYSLOT1 = "/MYSLOT"
-
-StaticPopupDialogs["MYSLOT_MSGBOX"] = {
-    text = L["Are you SURE to import ?"],
-    button1 = ACCEPT,
-    button2 = CANCEL,
-    timeout = 0,
-    whileDead = 1,
-    hideOnEscape = 1,
-    multiple = 0,
-}
-
-StaticPopupDialogs["MYSLOT_EXPORT_TITLE"] = {
-    text = L["Name of exported text"],
-    button1 = ACCEPT,
-    button2 = CANCEL,
-    hasEditBox = true,
-    timeout = 0,
-    whileDead = 1,
-    hideOnEscape = 1,
-    multiple = 0,
-    OnAccept = function()
-    end,
-    OnShow = function()
-    end,
-}
-
-StaticPopupDialogs["MYSLOT_CONFIRM_DELETE"] = {
-    text = L["Are you SURE to delete '%s'?"],
-    button1 = ACCEPT,
-    button2 = CANCEL,
-    timeout = 0,
-    whileDead = 1,
-    hideOnEscape = 1,
-    multiple = 0,
-}
+SLASH_MYSLOT1 = "/DEWATER"

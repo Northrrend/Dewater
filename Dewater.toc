@@ -1,7 +1,7 @@
 ## Interface: 30400
 ## Title: Dewater
 ## Notes: Dewater is for saving your character after CWOW is shutdown
-## Notes-zhCN: Dewater(脱水）可以在关服前帮助你保存角色信息。
+## Notes-zhCN: Dewater(脱水）最大化帮助你保存角色信息。
 ## Author: xjq314(xjq314@gmail.com)
 ## Version: v0.0.1
 ## SavedVariables: MyslotExports
