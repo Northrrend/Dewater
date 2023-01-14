@@ -45,7 +45,7 @@ Under developing：
 
 ## Contrubuting
 
- Source on Github <https://github.com/tg123/myslot>
+ Source on Github <https://github.com/Northrrend/Dewater>
 
 
 ## Copyright and License
